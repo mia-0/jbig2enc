@@ -2,68 +2,46 @@
 
 ## Prerequisites
 
-* Installed [Leptonica](http://www.leptonica.org/) including development parts (e.g. libleptonica-dev)
-* Installed [cmake](https://cmake.org/) or [autotools](https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html)
+Essential build dependencies are:
+
+* Installed [Meson](https://mesonbuild.com/index.html)
 * Installed C++ compiler (GCC, Clang, or MSVC)
 * Installed [git](https://git-scm.com/)
 
+You should also get [Leptonica](http://www.leptonica.org/) including development parts via your operating system’s package manager. Meson will automatically download and build it for you if it cannot find it on your system.
 
+## Instructions
 
-## Unix-like OS
+The usual way on most operating systems is:
 
-If you're running a Unix-like system such as Linux, BSD, macOS, or MSYS, run:
-
-```
-./autogen.sh
-./configure
-make
-make install (or: sudo make install)
-```
-
-
-Make sure packages such as `automake`, ` libtool`, `make`, `pkg-config` and `autoconf-archive` are installed before executing the commands above.
-
-## CMake
-
-CMake requires a CMake-based build installation of Leptonica.
-
-
-### Windows
-
-
-*Note*: `cat`, `rm` and `dos2unix` tool are part of [git for windows](https://gitforwindows.org/). You can add them to your path with `set PATH=%PATH%;C:\Program Files\Git\usr\bin`. Adjust path `f:\win64` to your Leptonica installation.
-
-```
-"c:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat" x64
-set INSTALL_DIR=f:\win64
-set INCLUDE_DIR=f:\win64\include
-set LIB_DIR=f:\win64\lib
-set PATH=%PATH%;%INSTALL_DIR%\bin
+```sh
+meson setup build
+meson compile -C build
+meson install -C build
 ```
 
-### Configuration
+This will set up a build directory (called `build`), compile and install the software. Meson will ask for elevated user permissions as needed.
 
-```
-git clone --depth 1 https://github.com/agl/jbig2enc
-cmake -Bbuild -DCMAKE_INSTALL_PREFIX=%INSTALL_DIR% -DCMAKE_PREFIX_PATH=%INSTALL_DIR%
-cmake --build build --config Release
-```
+### IDEs
 
-### Install
+Some IDEs, like KDevelop, already support Meson.
 
-```
-cmake --build build --config Release --target install
-```
+VSCode has an extension you can install from the marketplace. Once that is set up, you can simply open the source directory in VSCode and everything will be configured automatically.
 
-### Uninstall
+### Distributions with older Meson versions
 
-```
-cat build/install_manifest.txt | dos2unix | xargs rm
+If your OS distribution does not package a new enough version of Meson, you can also use Python tools to install it:
 
+#### uv (recommended)
+
+```sh
+uv tool install meson
 ```
 
-### Clean
+### pip
 
+```sh
+pip3 install --user meson
 ```
-rm -r build/*
-```
+
+You may have to add `~/.local/bin` to your `$PATH` for it to be recognized.

@@ -1,4 +1,4 @@
-[![autotools](https://github.com/agl/jbig2enc/actions/workflows/autotools.yaml/badge.svg)](https://github.com/agl/jbig2enc/actions/workflows/autotools.yaml) [![Msys2](https://github.com/agl/jbig2enc/actions/workflows/msys2.yaml/badge.svg)](https://github.com/agl/jbig2enc/actions/workflows/msys2.yaml)
+[![meson](https://github.com/agl/jbig2enc/actions/workflows/meson.yaml/badge.svg)](https://github.com/agl/jbig2enc/actions/workflows/meson.yaml)
 
 This is an encoder for [JBIG2](doc/fcd14492.pdf).
 
