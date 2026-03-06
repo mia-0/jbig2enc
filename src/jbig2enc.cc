@@ -210,9 +210,7 @@ unite_templates(struct jbig2ctx *ctx,
         numaSetValue(ctx->classer->naclass, i, new_representant);
       }
     }
-#if (LIBLEPT_MAJOR_VERSION == 1 && LIBLEPT_MINOR_VERSION >= 83) || LIBLEPT_MAJOR_VERSION > 1
-    ctx->classer->pixat->pix[new_representant]->refcount += ctx->classer->pixat->pix[second_template]->refcount;
-#else
+#if (LIBLEPT_MAJOR_VERSION <= 1 && LIBLEPT_MINOR_VERSION < 83)
     pixChangeRefcount(ctx->classer->pixat->pix[new_representant],pixGetRefcount(ctx->classer->pixat->pix[second_template]));
 #endif
   }
